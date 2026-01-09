@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Showroom | LuxeDecor</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #b88e2f;
+            --dark: #111;
+            --cream: #f9f6f0;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--cream); color: var(--dark); overflow-x: hidden; }
+
+        /* Navigation (Same as Home) */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 8%; background: var(--white); position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        .logo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: bold; text-decoration: none; color: #000; }
+        .logo span { color: var(--gold); }
+        
+        /* Showroom Header */
+        .header-box {
+            padding: 100px 8% 50px; text-align: center; background: var(--white);
+        }
+        .header-box h1 { font-family: 'Playfair Display', serif; font-size: 4rem; font-style: italic; }
+        
+        /* Filtering UI */
+        .filter-nav {
+            display: flex; justify-content: center; gap: 20px; padding: 20px 0;
+            position: sticky; top: 80px; background: var(--white); z-index: 900;
+        }
+        .filter-chip {
+            padding: 8px 25px; border: 1px solid #ddd; background: transparent;
+            border-radius: 50px; cursor: pointer; transition: 0.3s; font-weight: 500;
+        }
+        .filter-chip.active, .filter-chip:hover { background: var(--gold); color: white; border-color: var(--gold); }
+
+        /* Masonry Grid */
+        .showroom-grid {
+            padding: 40px 8%;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        /* Gallery Item */
+        .item {
+            position: relative; height: 500px; overflow: hidden; border-radius: 4px;
+            background: #eee;
+        }
+        .item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .item:hover img { transform: scale(1.1); }
+
+        /* Information Overlay */
+        .overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4); display: flex; flex-direction: column;
+            justify-content: flex-end; padding: 40px; color: white;
+            opacity: 0; transition: 0.5s;
+        }
+        .item:hover .overlay { opacity: 1; }
+        
+        .overlay h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 5px; }
+        .overlay p { font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+        
+        .btn-buy {
+            width: fit-content; padding: 12px 30px; background: var(--white);
+            color: var(--dark); border: none; font-weight: bold; cursor: pointer;
+            text-transform: uppercase; font-size: 0.7rem; transition: 0.3s;
+        }
+        .btn-buy:hover { background: var(--gold); color: white; }
+
+        footer { text-align: center; padding: 60px; background: var(--dark); color: #777; }
+
+        @media (max-width: 768px) {
+            .header-box h1 { font-size: 2.5rem; }
+            .showroom-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">Luxe<span>Decor</span></a>
+        <div class="nav-links">
+            <a href="index.html" style="text-decoration:none; color:black; font-weight:600;">Back to Home</a>
+        </div>
+    </nav>
+
+    <header class="header-box">
+        <h1 data-aos="fade-up">Virtual Showroom</h1>
+        <p data-aos="fade-up" data-aos-delay="200">A curation of all our luxury collections in one space.</p>
+    </header>
+
+    <div class="filter-nav">
+        <button class="filter-chip active">All Furniture</button>
+        <button class="filter-chip">Living Room</button>
+        <button class="filter-chip">Workspace</button>
+        <button class="filter-chip">Bedroom</button>
+    </div>
+
+    [Image of a grid-style furniture showroom layout with luxury interiors]
+
+    <main class="showroom-grid" id="showroom-container">
+        </main>
+
+    <footer>
+        <p>&copy; 2026 LuxeDecor Grand Showroom. All images sourced for demonstration.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Combined Furniture Collection from all previous codes
+        const allFurniture = [
+            { name: "Nordic Lounge", cat: "Living Room", price: 499, img: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800" },
+            { name: "Velvet Dusk Sofa", cat: "Living Room", price: 1250, img: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800" },
+            { name: "Minimal Oak Desk", cat: "Workspace", price: 820, img: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=800" },
+            { name: "Brutalist Stone", cat: "Living Room", price: 340, img: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=800" },
+            { name: "Arctic Fabric Bed", cat: "Bedroom", price: 2100, img: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800" },
+            { name: "Sunset Arc Lamp", cat: "Workspace", price: 195, img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800" },
+            { name: "Walnut Bed Frame", cat: "Bedroom", price: 1850, img: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800" },
+            { name: "Study Chair", cat: "Workspace", price: 220, img: "https://images.unsplash.com/photo-1581539250439-c96689b516dd?w=800" },
+            { name: "Modern Vanity", cat: "Bedroom", price: 670, img: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800" },
+            { name: "Nordic Wood Chair", cat: "Living Room", price: 120, img: "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=800" },
+            { name: "Ceramic Vase Set", cat: "Living Room", price: 60, img: "https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=800" },
+            { name: "Artisan Bench", cat: "Living Room", price: 340, img: "https://images.unsplash.com/photo-1577174881658-0f30ed549adc?w=800" }
+        ];
+
+        const container = document.getElementById('showroom-container');
+
+        function renderShowroom() {
+            container.innerHTML = '';
+            allFurniture.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'item';
+                div.setAttribute('data-aos', 'fade-up');
+                div.setAttribute('data-aos-delay', (index % 3) * 100);
+
+                div.innerHTML = `
+                    <img src="${item.img}" alt="${item.name}">
+                    <div class="overlay">
+                        <p>${item.cat}</p>
+                        <h3>${item.name}</h3>
+                        <p style="font-size: 1.2rem; font-weight: bold;">$${item.price}</p>
+                        <button class="btn-buy" onclick="buyItem('${item.name}', ${item.price})">Acquire Piece</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function buyItem(name, price) {
+            // Redirects to payment.html
+            window.location.href = `payment.html?name=${encodeURIComponent(name)}&price=${price}`;
+        }
+
+        renderShowroom();
+    </script>
+</body>
+</html>

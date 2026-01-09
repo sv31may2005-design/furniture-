@@ -1,0 +1,53 @@
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body { background-color: #f4f4f4; color: #333; }
+
+nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 10%; background: white; sticky: top; z-index: 1000;
+}
+
+.logo { font-size: 24px; font-weight: bold; }
+.logo span { color: #b88e2f; }
+.nav-links { list-style: none; display: flex; gap: 20px; }
+.nav-links a { text-decoration: none; color: #333; font-weight: 500; }
+
+.hero {
+    height: 80vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1350&q=80');
+    background-size: cover; background-position: center;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; color: white;
+}
+
+.product-section { padding: 50px 10%; }
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px; margin-top: 30px;
+}
+
+/* Card Styling */
+.card {
+    background: white; border-radius: 15px; overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.card:hover { transform: translateY(-10px); }
+
+.card img { width: 100%; height: 250px; object-fit: cover; }
+
+.card-info { padding: 20px; }
+.card-info h3 { font-size: 18px; margin-bottom: 10px; }
+.card-info .price { color: #b88e2f; font-weight: bold; font-size: 20px; }
+
+.btn {
+    padding: 12px 30px; background: #b88e2f; color: white;
+    border: none; border-radius: 5px; cursor: pointer;
+}

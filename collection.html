@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxe Collection | Designer Furniture</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #be903a;
+            --dark: #121212;
+            --white: #ffffff;
+            --bg: #f8f8f8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg); color: var(--dark); overflow-x: hidden; }
+
+        /* Navigation */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 8%; background: var(--white); position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        .logo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: bold; }
+        .logo span { color: var(--gold); }
+
+        /* Collection Header */
+        .collection-header {
+            padding: 80px 8% 40px;
+            text-align: center;
+        }
+        .collection-header h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(2.5rem, 5vw, 4rem); 
+            font-style: italic;
+        }
+        .underline { width: 60px; height: 3px; background: var(--gold); margin: 20px auto; }
+
+        /* Filter System */
+        .filter-group {
+            display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 10px 25px; border: 1px solid #ddd; background: white;
+            border-radius: 2px; cursor: pointer; transition: 0.3s; font-size: 0.9rem;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .filter-btn.active, .filter-btn:hover { background: var(--dark); color: white; border-color: var(--dark); }
+
+        /* The Grand Grid */
+        .collection-grid {
+            padding: 0 8% 100px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* Product Card */
+        .p-card {
+            background: var(--white);
+            position: relative;
+            height: 450px;
+            overflow: hidden;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .p-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .p-card:hover img { transform: scale(1.15); }
+
+        /* Glassmorphism Info Overlay */
+        .p-overlay {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            transition: 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .p-card:hover .p-overlay { bottom: 0; }
+
+        .p-overlay h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 5px; }
+        .p-overlay p { font-size: 0.8rem; color: #444; margin-bottom: 15px; font-weight: 600; }
+
+        .buy-now-btn {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 20px; background: var(--dark); color: white;
+            text-decoration: none; font-weight: bold; font-size: 0.8rem;
+            text-transform: uppercase; transition: 0.3s;
+        }
+        .buy-now-btn:hover { background: var(--gold); }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .collection-grid { grid-template-columns: 1fr; }
+            .p-card { height: 400px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">VERMA<span>DECOR</span></div>
+        <div style="font-size: 0.9rem; font-weight: 600;"><i class="fas fa-shopping-bag"></i> Premium Collection</div>
+    </nav>
+
+    <header class="collection-header">
+        <h1 data-aos="fade-up">Explore Our Curation</h1>
+        <div class="underline" data-aos="zoom-in"></div>
+        <p data-aos="fade-up" data-aos-delay="200">20+ Handcrafted Masterpieces for Modern Living</p>
+    </header>
+
+    <div class="filter-group" data-aos="fade-up">
+        <button class="filter-btn active">All Pieces</button>
+ </div>
+
+    <main class="collection-grid" id="main-grid">
+        </main>
+
+    <footer style="padding: 50px; background: #111; color: #555; text-align: center;">
+        <p>&copy; 2026 LUXEDECOR. Timeless Design, Delivered.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Database of 20 High-Quality Furniture items
+        const furniture = [
+            { name: "Teak Wood Sofa", cat: "Living", price: 899, img: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600" },
+            { name: "Royal King Bed", cat: "Bedroom", price: 1250, img: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600" },
+            { name: "Nordic Lounge Chair", cat: "Living", price: 240, img: "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=600" },
+            { name: "Marble Coffee Table", cat: "Living", price: 340, img: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=600" },
+            { name: "Oak Study Desk", cat: "Bedroom", price: 420, img: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=600" },
+            { name: "Emerald Accent Chair", cat: "Living", price: 190, img: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600" },
+            { name: "Minimalist Bookshelf", cat: "Bedroom", price: 280, img: "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=600" },
+            { name: "Golden Floor Lamp", cat: "Decor", price: 110, img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600" },
+            { name: "Sheesham Wardrobe", cat: "Bedroom", price: 950, img: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=600" },
+            { name: "Velvet Pouf", cat: "Decor", price: 75, img: "https://images.unsplash.com/photo-1567016432779-094069958ea5?w=600" },
+            { name: "Walnut Dining Set", cat: "Living", price: 1550, img: "https://images.unsplash.com/photo-1617806118233-18e16208a50a?w=600" },
+            { name: "Canvas Art Piece", cat: "Decor", price: 130, img: "https://images.unsplash.com/photo-1618221469555-7f3ad97540d6?w=600" },
+            { name: "Cane Swing Chair", cat: "Decor", price: 210, img: "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600" },
+            { name: "Sleek Bar Stools", cat: "Living", price: 145, img: "https://images.unsplash.com/photo-1503602642458-232111445657?w=600" },
+            { name: "Midnight Chest", cat: "Bedroom", price: 670, img: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600" },
+            { name: "Handwoven Rug", cat: "Decor", price: 320, img: "https://images.unsplash.com/photo-1531835597097-692b13d7bb44?w=600" },
+            { name: "Ceramic Vases", cat: "Decor", price: 45, img: "https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=600" },
+            { name: "Double Bed Mattress", cat: "Bedroom", price: 540, img: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600" },
+            { name: "Industrial Sideboard", cat: "Living", price: 430, img: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600" },
+            { name: "Leather Recliner", cat: "Living", price: 790, img: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600" }
+        ];
+
+        const grid = document.getElementById('main-grid');
+
+        function loadProducts() {
+            furniture.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'p-card';
+                card.setAttribute('data-aos', 'fade-up');
+                card.setAttribute('data-aos-delay', (index % 3) * 100);
+
+                card.innerHTML = `
+                    <img src="${item.img}" alt="${item.name}">
+                    <div class="p-overlay">
+                        <p>${item.cat}</p>
+                        <h3>${item.name}</h3>
+                        <a href="payment.html?name=${encodeURIComponent(item.name)}&price=${item.price}" class="buy-now-btn">
+                            Buy Now <span>$${item.price}</span>
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        loadProducts();
+    </script>
+</body>
+</html>

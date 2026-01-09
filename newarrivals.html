@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VERMA Decor | Indian New Arrivals</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #8d4925; /* Teak/Sheesham Wood Color */
+            --gold: #d4af37;
+            --dark: #2c2c2c;
+            --light: #fdfaf5;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: var(--light); color: var(--dark); overflow-x: hidden; }
+
+        /* Navigation */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 8%; background: var(--white); position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .logo { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--primary); }
+        .logo span { color: var(--gold); }
+
+        /* Section Header */
+        .section-header {
+            padding: 60px 8% 30px;
+            text-align: center;
+        }
+        .section-header h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary); }
+        .section-header p { color: #777; font-style: italic; }
+        .underline { width: 60px; height: 3px; background: var(--gold); margin: 10px auto; }
+
+        /* Product Grid */
+        .products-container {
+            padding: 0 8% 80px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* Card GUI */
+        .p-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            transition: 0.4s ease;
+            position: relative;
+            border-bottom: 3px solid transparent;
+        }
+        .p-card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--gold);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .img-box { width: 100%; height: 300px; overflow: hidden; position: relative; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
+        .p-card:hover .img-box img { transform: scale(1.1); }
+
+        .price-tag {
+            position: absolute; top: 15px; right: 15px;
+            background: var(--primary); color: white;
+            padding: 5px 12px; border-radius: 4px; font-weight: 600;
+        }
+
+        .p-info { padding: 20px; text-align: center; }
+        .p-info h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 10px; }
+        
+        .buy-btn {
+            width: 100%; padding: 12px; background: var(--primary); color: white;
+            border: none; border-radius: 5px; cursor: pointer; transition: 0.3s;
+            font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .buy-btn:hover { background: var(--dark); }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .section-header h1 { font-size: 1.8rem; }
+            .products-container { padding: 0 5% 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">VERMA<span>Decor</span></div>
+        <div style="color: var(--primary); font-weight: 600;"><i class="fas fa-truck"></i> Free Shipping PAN India</div>
+    </nav>
+
+    <header class="section-header">
+        <h1 data-aos="fade-up">Nayi Shuruaat: New Arrivals</h1>
+        <p data-aos="fade-up" data-aos-delay="200">Affordable Luxury for Every Indian Home</p>
+        <div class="underline"></div>
+    </header>
+
+    <main class="products-container" id="furniture-list">
+        </main>
+
+    <footer style="background: var(--primary); color: white; padding: 40px; text-align: center;">
+        <p>&copy; 2026 VERMADecor Furniture. Proudly Made in India.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // List of 20 Indian-Style Furniture Items with Budget Prices
+        const indianFurniture = [
+            { name: "Teak Wood Double Bed", price: 350, img: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600" },
+            { name: "Royal Maharaja Sofa", price: 420, img: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600" },
+            { name: "Sheesham Dining Table", price: 280, img: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=600" },
+            { name: "Handcrafted Jharokha Mirror", price: 45, img: "https://images.unsplash.com/photo-1618221469555-7f3ad97540d6?w=600" },
+            { name: "Ethnic Cane Chair", price: 85, img: "https://images.unsplash.com/photo-1581539250439-c96689b516dd?w=600" },
+            { name: "Rajasthani Chest Box", price: 120, img: "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=600" },
+            { name: "Modern King Bed", price: 390, img: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600" },
+            { name: "Silk Velvet Armchair", price: 150, img: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600" },
+            { name: "Bamboo Balcony Swing", price: 99, img: "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600" },
+            { name: "Jaipur Printed Ottoman", price: 35, img: "https://images.unsplash.com/photo-1567016432779-094069958ea5?w=600" },
+            { name: "Office Teak Desk", price: 180, img: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=600" },
+            { name: "Clay Vase Set (3pc)", price: 25, img: "https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=600" },
+            { name: "Antique Side Table", price: 65, img: "https://images.unsplash.com/photo-1532372320572-cda25653a26d?w=600" },
+            { name: "Sheesham Bookshelf", price: 140, img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600" },
+            { name: "Fabric Foldable Bed", price: 110, img: "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600" },
+            { name: "Mandir Prayer Stool", price: 30, img: "https://images.unsplash.com/photo-1503602642458-232111445657?w=600" },
+            { name: "Low-height Sofa (Diwan)", price: 240, img: "https://images.unsplash.com/photo-1550226891-ef816aed4a98?w=600" },
+            { name: "Teak Wood Wardrobe", price: 380, img: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=600" }
+        ];
+
+        const listContainer = document.getElementById('furniture-list');
+
+        function displayFurniture() {
+            indianFurniture.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'p-card';
+                card.setAttribute('data-aos', 'fade-up');
+                card.setAttribute('data-aos-delay', (index % 4) * 100);
+
+                card.innerHTML = `
+                    <div class="img-box">
+                        <img src="${item.img}" alt="${item.name}">
+                        <div class="price-tag">$${item.price}</div>
+                    </div>
+                    <div class="p-info">
+                        <h3>${item.name}</h3>
+                        <button class="buy-btn" onclick="buyNow('${item.name}', ${item.price})">Add to Cart</button>
+                    </div>
+                `;
+                listContainer.appendChild(card);
+            });
+        }
+
+        function buyNow(name, price) {
+            // Passing data to your existing payment.html
+            window.location.href = `payment.html?name=${encodeURIComponent(name)}&price=${price}`;
+        }
+
+        displayFurniture();
+    </script>
+</body>
+</html>

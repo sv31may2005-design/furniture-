@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment | LuxeDecor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .payment-card { background: white; width: 400px; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h2 { margin: 0; color: #b88e2f; }
+        .item-box { background: #fafafa; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px dashed #ccc; }
+        .method { display: flex; align-items: center; padding: 15px; border: 1px solid #eee; margin-bottom: 10px; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .method:hover { border-color: #3395ff; background: #f0f7ff; }
+        .method i { font-size: 1.5rem; margin-right: 15px; color: #555; }
+        .pay-now { width: 100%; padding: 15px; background: #333; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        #success { display: none; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="payment-card" id="main-panel">
+        <div class="header">
+            <h2>Luxe<span>Decor</span> Checkout</h2>
+            <p>Secure Payment Gateway</p>
+        </div>
+        <div class="item-box">
+            <p><strong>Product:</strong> <span id="prod-name">Loading...</span></p>
+            <p><strong>Amount:</strong> $<span id="prod-price">0</span></p>
+        </div>
+        <div class="method" onclick="process()">
+            <i class="fab fa-google-pay"></i>
+            <div><strong>UPI / Google Pay</strong></div>
+        </div>
+        <div class="method" onclick="process()">
+            <i class="fas fa-credit-card"></i>
+            <div><strong>Debit / Credit Card</strong></div>
+        </div>
+        <button class="pay-now" onclick="process()">COMPLETE PAYMENT</button>
+    </div>
+
+    <div class="payment-card" id="success">
+        <i class="fas fa-check-circle" style="font-size: 5rem; color: #2ecc71;"></i>
+        <h2 style="margin-top: 20px;">Payment Successful!</h2>
+        <p>Order confirmed. Redirecting home...</p>
+    </div>
+
+    <script>
+        // Get data from URL
+        const params = new URLSearchParams(window.location.search);
+        document.getElementById('prod-name').innerText = params.get('name') || "Furniture Item";
+        document.getElementById('prod-price').innerText = params.get('price') || "0";
+
+        function process() {
+            document.getElementById('main-panel').style.display = 'none';
+            document.getElementById('success').style.display = 'block';
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
